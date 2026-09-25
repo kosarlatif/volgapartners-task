@@ -51,6 +51,10 @@ export class AudioProcessor
       buffer,
     } = job.data;
 
+    const isFinalAttempt =
+      job.attemptsMade >=
+      (job.opts.attempts ?? 1) - 1;
+
     this.logger.log(
       `Processing transcription ${jobId}`,
     );
@@ -171,7 +175,7 @@ export class AudioProcessor
         },
 
         data: {
-          status: 'FAILED',
+          status: isFinalAttempt ? 'FAILED': 'QUEUED',
           errorMessage: message,
         },
       });
