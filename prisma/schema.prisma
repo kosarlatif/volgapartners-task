@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum TranscriptionStatus {
+  QUEUED
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+model TranscriptionJob {
+  id           String             @id @default(uuid())
+  originalName String
+  mimeType     String
+  fileSize     Int
+  status       TranscriptionStatus @default(QUEUED)
+  language     String?
+  fullText     String?
+  errorMessage String?
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+  completedAt  DateTime?
+
+  segments     TranscriptionSegment[]
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+model TranscriptionSegment {
+  id        String           @id @default(uuid())
+  jobId     String
+  start     Float
+  end       Float
+  text      String
+
+  job TranscriptionJob @relation(
+    fields: [jobId],
+    references: [id],
+    onDelete: Cascade
+  )
+
+  @@index([jobId])
+}
