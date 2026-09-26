@@ -54,15 +54,8 @@ export class AudioController {
         callback,
       ) => {
         const allowedTypes = [
-          'audio/mpeg',
           'audio/mp3',
           'audio/wav',
-          'audio/x-wav',
-          'audio/wave',
-          'audio/mp4',
-          'audio/m4a',
-          'audio/webm',
-          'audio/ogg',
         ];
 
         if (!allowedTypes.includes(file.mimetype)) {
