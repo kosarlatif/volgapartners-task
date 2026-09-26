@@ -4,7 +4,7 @@ A production-oriented NestJS + TypeScript API for asynchronous audio transcripti
 
 ## Features
 
-* MP3, WAV, M4A, WebM, and OGG uploads
+* MP3, WAV
 * OpenAI speech-to-text
 * Segment-level timestamps
 * BullMQ + Redis asynchronous processing
@@ -248,9 +248,6 @@ The API supports:
 
 * MP3
 * WAV
-* M4A
-* WebM
-* OGG
 
 For a larger production system, FFmpeg can be added to normalize incoming audio formats before transcription.
 
@@ -353,23 +350,3 @@ For public production deployment, consider adding:
 * Secrets management
 * Structured logging
 * Monitoring and alerting
-* Audit logging
-* Idempotency keys
-* Per-user quotas
-
-## Future Improvements
-
-* S3/Azure Blob Storage
-* FFmpeg normalization
-* Word-level timestamps
-* Speaker diarization
-* WebSocket/SSE progress updates
-* Webhook callbacks
-* Dead-letter queue
-* Authentication and user accounts
-* Prometheus metrics
-* OpenTelemetry tracing
-
-## License
-
-MIT
